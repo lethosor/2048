@@ -240,7 +240,10 @@ GameManager.prototype.findFarthestPosition = function (cell, vector) {
 };
 
 GameManager.prototype.movesAvailable = function () {
-  return this.grid.cellsAvailable() || this.tileMatchesAvailable();
+  if (this.grid.cellsAvailable() || this.tileMatchesAvailable()) return true;
+  this.grid.removeTile({x:Math.floor(Math.random()*4), y:Math.floor(Math.random()*4)});
+  this.actuate();
+  return true;
 };
 
 // Check for available matches between tiles (more expensive check)
